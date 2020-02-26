@@ -1,0 +1,137 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- 设置activity切换动画 -->
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
+    <!--全屏样式-->
+    <style name="FullWindowTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowFullscreen">true</item>
+        <!-- 设置activity切换动画 -->
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
+    <!--无ActionBar样式-->
+    <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!-- 设置activity切换动画 -->
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
+    <!-- animation 样式 -->
+    <style name="activityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
+    </style>
+
+    <!--圆角Dialog-->
+    <style name="MyDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+
+    <!--自定义CheckBox样式-->
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_style</item>
+    </style>
+
+    <!--实下滑线样式-->
+    <style name="Line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/line</item>
+    </style>
+
+    <!--选项条目样式-->
+    <style name="OptionItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">102px</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="Theme_AudioDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--Dialog的windowFrame框为无-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--//是否半透明-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--/背景是否模糊显示-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <style name="BaseNoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <!--白色主题样式，，注意每一项都不能少-->
+    <style name="picture.white.style" parent="BaseNoActionBarTheme">
+        <!-- Customize your theme here. -->
+        <!--标题栏背景色-->
+        <item name="colorPrimary">@color/app_color_white</item>
+        <!--状态栏背景色-->
+        <item name="colorPrimaryDark">@color/app_color_white</item>
+        <!--是否改变图片列表界面状态栏字体颜色为黑色-->
+        <item name="picture.statusFontColor">true</item>
+        <!--返回键图标-->
+        <item name="picture.leftBack.icon">@drawable/ic_back_arrow</item>
+        <!--标题下拉箭头-->
+        <item name="picture.arrow_down.icon">@drawable/ic_orange_arrow_down</item>
+        <!--标题上拉箭头-->
+        <item name="picture.arrow_up.icon">@drawable/ic_orange_arrow_up</item>
+        <!--标题文字颜色-->
+        <item name="picture.title.textColor">@color/app_color_black</item>
+        <!--标题栏右边文字-->
+        <item name="picture.right.textColor">@color/app_color_black</item>
+        <!--图片列表勾选样式-->
+        <item name="picture.checked.style">@drawable/picture_checkbox_selector</item>
+        <!--开启图片列表勾选数字模式,开启的话勾选样式要换-->
+        <item name="picture.style.checkNumMode">false</item>
+        <!--选择图片样式0/9-->
+        <item name="picture.style.numComplete">true</item>
+        <!--图片列表底部背景色-->
+        <item name="picture.bottom.bg">@color/app_color_fa</item>
+        <!--图片列表预览文字颜色-->
+        <item name="picture.preview.textColor">@color/picture_list_sina_text_color</item>
+        <!--图片列表已完成文字颜色-->
+        <item name="picture.complete.textColor">@color/picture_list_sina_text_color</item>
+        <!--图片已选数量圆点背景色-->
+        <item name="picture.num.style">@drawable/picture_num_oval</item>
+        <!--预览界面标题栏背景色-->
+        <item name="picture.ac_preview.title.bg">@color/app_color_white</item>
+        <!--预览界面标题文字颜色-->
+        <item name="picture.ac_preview.title.textColor">@color/app_color_black</item>
+        <!--预览界面已完成文字颜色-->
+        <item name="picture.ac_preview.complete.textColor">@color/picture_list_sina_text_color
+        </item>
+        <!--预览界面底部背景色-->
+        <item name="picture.ac_preview.bottom.bg">@color/picture_color_fa</item>
+        <!--预览界面返回箭头-->
+        <item name="picture.preview.leftBack.icon">@drawable/ic_back_arrow</item>
+        <!--裁剪页面标题背景色-->
+        <item name="picture.crop.toolbar.bg">@color/app_color_white</item>
+        <!--裁剪页面状态栏颜色-->
+        <item name="picture.crop.status.color">@color/app_color_white</item>
+        <!--裁剪页面标题文字颜色-->
+        <item name="picture.crop.title.color">@color/app_color_black</item>
+        <!--相册文件夹列表选中图标-->
+        <item name="picture.folder_checked_dot">@drawable/picture_orange_oval</item>
+    </style>
+    <style name="StartTheme" parent="AppTheme">
+        <item name="android:windowBackground">@mipmap/splash</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>

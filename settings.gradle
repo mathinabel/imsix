@@ -1,0 +1,2 @@
+include ':app', ':alertlibrary', ':scroll'
+rootProject.name='imsix'

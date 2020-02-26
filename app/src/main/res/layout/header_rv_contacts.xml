@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+   >
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/llNewFriend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_common_item"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/item_margin_top_and_bottom"
+        android:paddingLeft="@dimen/item_margin_left_and_right"
+        android:paddingRight="@dimen/item_margin_left_and_right"
+        android:paddingTop="@dimen/item_margin_top_and_bottom"
+      >
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/ivNewFriend"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+
+                android:layout_marginRight="5dp"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@mipmap/ic_new_friend"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:roundedCornerRadius="15dp" />
+
+
+            <TextView
+                android:id="@+id/tvNewFriendUnread"
+                android:layout_width="15px"
+                android:layout_height="15px"
+                android:layout_alignRight="@id/ivNewFriend"
+                android:layout_alignTop="@id/ivNewFriend"
+                android:layout_marginRight="-8px"
+                android:layout_marginTop="-5px"
+                android:background="@mipmap/bg_unread"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="24px"
+                android:visibility="gone"/>
+
+
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/item_margin_left_and_right"
+            android:text="@string/new_friend"
+            android:textColor="@color/black0"
+            android:textSize="35px"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View
+        style="@style/Line"
+        android:layout_marginLeft="@dimen/item_margin_left_and_right"
+        android:layout_marginRight="@dimen/item_margin_left_and_right"
+        />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/llGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_common_item"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/item_margin_top_and_bottom"
+        android:paddingLeft="@dimen/item_margin_left_and_right"
+        android:paddingRight="@dimen/item_margin_left_and_right"
+        android:paddingTop="@dimen/item_margin_top_and_bottom"
+        android:visibility="gone">
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/ivNewGroup"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="5dp"
+                fresco:placeholderImage="@mipmap/ic_group_cheat"
+                fresco:roundedCornerRadius="15dp"
+                fresco:actualImageScaleType="centerCrop"
+                fresco:placeholderImageScaleType="focusCrop"
+                fresco:failureImageScaleType="focusCrop" />
+
+
+
+            <TextView
+                android:id="@+id/tvNewGroupUnread"
+                android:layout_width="15px"
+                android:layout_height="15px"
+                android:layout_alignRight="@id/ivNewFriend"
+                android:layout_alignTop="@id/ivNewFriend"
+                android:layout_marginRight="-8px"
+                android:layout_marginTop="-5px"
+                android:background="@mipmap/bg_unread"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="24px"
+                android:visibility="gone"/>
+
+
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/item_margin_left_and_right"
+            android:text="@string/group_cheat"
+            android:textColor="@color/black0"
+            android:textSize="35px"/>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View
+
+        style="@style/Line"
+        android:layout_marginLeft="@dimen/item_margin_left_and_right"
+        android:layout_marginRight="@dimen/item_margin_left_and_right"
+        />
+
+
+
+    <com.yanzhenjie.recyclerview.SwipeRecyclerView
+        android:id="@+id/contract_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</com.zhy.autolayout.AutoLinearLayout>

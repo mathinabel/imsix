@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mxn.soul.flowingdrawer_core.FlowingDrawer
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    app:edPosition="1"
+    app:edMenuSize="260dp"
+    app:edMenuBackground="#dddddd">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    >
+
+
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        xmlns:titlebar="http://schemas.android.com/apk/res-auto"
+
+        android:id="@+id/commonTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        titlebar:centerText="消息"
+        titlebar:centerType="textView"
+        titlebar:fillStatusBar="true"
+        titlebar:leftType="customView"
+        titlebar:leftCustomView="@layout/titlebar_frscoprofile"
+        titlebar:rightType="customView"
+        titlebar:rightCustomView="@layout/titlebar_search_and_more"
+
+
+        />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_2"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
+
+    <com.flyco.tablayout.CommonTabLayout
+        xmlns:tl="http://schemas.android.com/apk/res-auto"
+
+        android:id="@+id/tl_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        tl:tl_indicator_color="#2C97DE"
+        tl:tl_textSelectColor="#2C97DE"
+        tl:tl_textUnselectColor="#66000000"
+        tl:tl_underline_color="#DDDDDD"
+        tl:tl_underline_height="1dp" />
+
+
+
+</LinearLayout>
+    <!--menu-->
+    <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
+        android:id="@+id/menulayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/id_container_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
+
+</com.mxn.soul.flowingdrawer_core.FlowingDrawer>

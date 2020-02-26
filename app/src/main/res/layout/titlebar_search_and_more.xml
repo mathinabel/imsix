@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    >
+    <ImageView
+        android:id="@+id/selected_search2"
+
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+
+        android:src="@mipmap/search" />
+
+    <ImageView
+        android:id="@+id/selected_search"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="12dp"
+        android:layout_toEndOf="@id/selected_search2"
+        android:src="@mipmap/ic_cheat_add" />
+
+
+
+</RelativeLayout>
