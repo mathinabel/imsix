@@ -9,6 +9,8 @@ android {
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    //    renderscriptTargetApi 28
+   //     renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -22,9 +24,9 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
-    greendao{
+ greendao{
         //数据库版本
-        schemaVersion 9
+        schemaVersion 25
     }
 }
 
@@ -68,7 +70,7 @@ dependencies {
 
     implementation'com.zhy:okhttputils:2.6.2'
 
-    implementation 'org.greenrobot:greendao:3.2.2'
+  implementation 'org.greenrobot:greendao:3.2.2'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'org.jetbrains:annotations:13.0'
 
@@ -85,4 +87,8 @@ dependencies {
 //update
     implementation 'com.qianwen:update-app:3.5.2'
     implementation 'com.lzy.net:okgo:3.0.4'
+
+    //qrcode
+    implementation 'com.github.yuzhiqiang1993:zxing:2.2.8'
+    implementation 'com.kongzue.dialog:dialog:2.4.8'
 }

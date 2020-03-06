@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+import com.kongzue.dialog.v2.TipDialog;
 import com.quyuanjin.imsix.Constant;
 import com.quyuanjin.imsix.MainActivity;
 import com.quyuanjin.imsix.R;
@@ -89,16 +90,16 @@ public class LoginAndRegisterAc extends AppCompatActivity implements View.OnClic
 
             case R.id.login:
 
-                String phone = phoneEditText.getText().toString();
+                String userid = phoneEditText.getText().toString();
                 String pwd2 = pwd.getText().toString();
 
-                if (phone.equals("") || "".equals(pwd2)) {
+                if (userid.equals("") || "".equals(pwd2)) {
                     ToastUtils.show(getApplicationContext(), "请正确填写内容");
                 } else {
                     OkHttpUtils.post()
                             .url(Constant.URL + "login")
-                            .addParams("phone", phone)
-                            .addParams("pwd", phone)
+                            .addParams("userid", userid)
+                            .addParams("pwd", pwd2)
                             .build().execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
@@ -108,6 +109,23 @@ public class LoginAndRegisterAc extends AppCompatActivity implements View.OnClic
 
                         @Override
                         public void onResponse(String response, int id) {
+                            Gson gson = new Gson();
+                            User user = gson.fromJson(response, User.class);
+                            if (!"".equals(user.getId())){
+                                SharedPreferencesUtils.setParam(getApplicationContext(), "name", user.getName());
+                                SharedPreferencesUtils.setParam(getApplicationContext(), "des", user.getDescription());
+                                SharedPreferencesUtils.setParam(getApplicationContext(), "sex", user.getSex());
+                                SharedPreferencesUtils.setParam(getApplicationContext(), "portrait", user.getPortrait());
+                                SharedPreferencesUtils.setParam(getApplicationContext(), "uuid", user.getToken());
+                                SharedPreferencesUtils.setParam(getApplicationContext(), "userid", user.getId());
+                                Intent intent = new Intent(LoginAndRegisterAc.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else {
+                                TipDialog.show(LoginAndRegisterAc.this, "用户名或密码错误", TipDialog.SHOW_TIME_LONG, TipDialog.TYPE_ERROR);
+                            }
+
+
 
                         }
                     });

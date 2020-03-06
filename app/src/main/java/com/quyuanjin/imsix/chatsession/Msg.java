@@ -7,7 +7,7 @@ import org.greenrobot.greendao.annotation.Id;
 @Entity
 public class Msg {
     @Id(autoincrement = true)
-    private  Long id;
+    private Long id;
     private String sendID;
     private String receiveId;
 
@@ -20,9 +20,11 @@ public class Msg {
     private float recorderTime;
     private String sendSucceedType;
     private String readType;
+
     @Generated(hash = 23037457)
     public Msg() {
     }
+
     @Generated(hash = 1784794371)
     public Msg(Long id, String sendID, String receiveId, String msg, String createTime, String localPath, String netPath, int contentType, float recorderTime, String sendSucceedType, String readType) {
         this.id = id;
@@ -37,6 +39,7 @@ public class Msg {
         this.sendSucceedType = sendSucceedType;
         this.readType = readType;
     }
+
     public String getReadType() {
         return readType;
     }
@@ -60,7 +63,6 @@ public class Msg {
     public void setReceiveId(String receiveId) {
         this.receiveId = receiveId;
     }
-
 
 
     public String getMsg() {
@@ -118,9 +120,11 @@ public class Msg {
     public void setSendSucceedType(String sendSucceedType) {
         this.sendSucceedType = sendSucceedType;
     }
+
     public Long getId() {
         return this.id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }

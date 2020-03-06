@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,6 +20,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.flyco.tablayout.CommonTabLayout;
@@ -29,7 +31,9 @@ import com.google.gson.reflect.TypeToken;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.quyuanjin.imsix.addfriend.AddFriendAc;
+import com.quyuanjin.imsix.addfriend.AddFriendSearchUserInfoAc;
 import com.quyuanjin.imsix.app.App;
+import com.quyuanjin.imsix.chatsession.ChatAc;
 import com.quyuanjin.imsix.chatsession.Msg;
 import com.quyuanjin.imsix.contract.ContractFragment;
 import com.quyuanjin.imsix.contract.PojoContract;
@@ -44,6 +48,8 @@ import com.vector.update_app.UpdateAppManager;
 import com.vector.update_app.UpdateCallback;
 import com.vector.update_app.utils.ColorUtil;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
+import com.yzq.zxinglibrary.android.CaptureActivity;
+import com.yzq.zxinglibrary.bean.ZxingConfig;
 import com.zaaach.toprightmenu.MenuItem;
 import com.zaaach.toprightmenu.TopRightMenu;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -61,10 +67,12 @@ import java.util.List;
 import java.util.Map;
 
 import eventbus.ClienthandlerBus.TellContractAddFirendMsgBack;
+import kr.co.namee.permissiongen.PermissionGen;
 import okhttp3.Call;
 import service.NettyService;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE_SCAN = 9;
     private CommonTabLayout mTabLayout_1;
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private int[] mIconUnselectIds = {
@@ -144,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
 
 //添加菜单项
                 List<MenuItem> menuItems = new ArrayList<>();
-                menuItems.add(new MenuItem(R.mipmap.ic_friend_start, "加好友"));
-               // menuItems.add(new MenuItem(R.mipmap.ic_scan_white, "扫一扫"));
+                menuItems.add(new MenuItem(R.mipmap.ic_around_blue, "加好友"));
+               menuItems.add(new MenuItem(R.mipmap.ic_scan_blue, "扫一扫"));
 
                 mTopRightMenu
                         .setHeight(480)     //默认高度480
@@ -162,12 +170,38 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(MainActivity.this, AddFriendAc.class);
                                     startActivity(intent);
                                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                }else if (position==1){
+
+                                    PermissionGen.with(MainActivity.this)
+                                            .addRequestCode(100)
+                                            .permissions(
+                                                    Manifest.permission.CAMERA)
+                                            .request();
+
+
+                                    Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+                                    /*ZxingConfig是配置类
+                                     *可以设置是否显示底部布局，闪光灯，相册，
+                                     * 是否播放提示音  震动
+                                     * 设置扫描框颜色等
+                                     * 也可以不传这个参数
+                                     * */
+                                    ZxingConfig config = new ZxingConfig();
+                                    config.setPlayBeep(true);//是否播放扫描声音 默认为true
+                                    config.setShake(true);//是否震动  默认为true
+                                    config.setDecodeBarCode(true);//是否扫描条形码 默认为true
+                                    config.setReactColor(R.color.colorAccent);//设置扫描框四个角的颜色 默认为白色
+                                    config.setFrameLineColor(R.color.colorAccent);//设置扫描框边框颜色 默认无色
+                                    config.setScanLineColor(R.color.colorAccent);//设置扫描线的颜色 默认白色
+                                    config.setFullScreenScan(false);//是否全屏扫描  默认为true  设为false则只会在扫描框中扫描
+                                    intent.putExtra(Constant.INTENT_ZXING_CONFIG, config);
+                                    startActivityForResult(intent, REQUEST_CODE_SCAN);
                                 }
 
 
                             }
                         })
-                        .showAsDropDown(simpleDraweeView2, -225, 0);    //带偏移量
+                        .showAsDropDown(simpleDraweeView2, -225, 100);    //带偏移量
 //      		.showAsDropDown(moreBtn)
             }
         });
@@ -182,7 +216,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        Uri uri = Uri.parse("");
+
+     Uri uri = Uri.parse("");
         simpleDraweeView.setImageURI(uri);
 
         int version = android.os.Build.VERSION.SDK_INT;
@@ -258,6 +293,11 @@ public class MainActivity extends AppCompatActivity {
         });
         setupMenu();
         checkVersion();
+        PermissionGen.with(MainActivity.this)
+                .addRequestCode(100)
+                .permissions(
+                        Manifest.permission.CAMERA)
+                .request();
     }
 
     private void setupMenu() {
@@ -476,4 +516,26 @@ public class MainActivity extends AppCompatActivity {
         }
         return localVersion;
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // 扫描二维码/条码回传
+        if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
+            if (data != null) {
+
+                String content = data.getStringExtra(Constant.CODED_CONTENT);
+             //   result.setText("扫描结果为：" + content);
+
+                Intent intent = new Intent(MainActivity.this, AddFriendSearchUserInfoAc.class);
+                intent.putExtra("search", content);
+                startActivity(intent);
+            }
+        }
+    }
+
+
+
 }

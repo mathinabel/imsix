@@ -7,10 +7,10 @@
     android:background="@color/gray5"
     android:orientation="vertical">
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
-        android:id="@+id/titlebar"
+        android:id="@+id/titlebar10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        titlebar:centerText="本界面功能还没做"
+        titlebar:centerText="设置"
         titlebar:centerType="textView"
         titlebar:leftDrawable="@drawable/comm_titlebar_back_normal"
         titlebar:leftDrawablePadding="0dp"

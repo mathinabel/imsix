@@ -105,6 +105,9 @@ public class MenuListFragment extends Fragment {
             my_image_view.setImageURI(Uri.parse(s));
 
         }
+        tvName.setText((String) SharedPreferencesUtils.getParam(getContext().getApplicationContext(), "name", ""));
+
+
     }
 
     @Override

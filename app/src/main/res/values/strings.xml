@@ -257,7 +257,7 @@
     <string name="currency">通用</string>
     <string name="account_and_safe">账号与安全</string>
     <string name="about">关于</string>
-    <string name="exit">退出</string>
+    <string name="exit">退出登录</string>
     <string name="exit_account">退出当前账号</string>
     <string name="exit_app">关闭</string>
 

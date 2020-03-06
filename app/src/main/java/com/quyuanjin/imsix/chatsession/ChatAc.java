@@ -166,7 +166,7 @@ public class ChatAc extends AppCompatActivity implements View.OnClickListener {
         // layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
 
-        mList.add(new Msg(null, "", "", "你好", "", "", "", 0, 0, "", ""));
+       // mList.add(new Msg(null, "", "", "你好", "", "", "", 0, 0, "", ""));
         initDataFromLocal();
 
         adapter = new ChatAdapter(this, mList);
@@ -556,7 +556,7 @@ public class ChatAc extends AppCompatActivity implements View.OnClickListener {
                             Constant.item_text_send, 0, "", "");
 
                     mList.add(msg);
-                    App.getDaoSession().getMsgDao().insert(msg);
+                   App.getDaoSession().getMsgDao().insert(msg);
                     adapter.notifyDataSetChanged();
                     mEditText.setText("");
                     recyclerView.scrollToPosition(mList.size() - 1);

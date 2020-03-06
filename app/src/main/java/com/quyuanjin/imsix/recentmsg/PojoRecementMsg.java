@@ -3,9 +3,9 @@ package com.quyuanjin.imsix.recentmsg;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
-@Entity
+//@Entity
 public class PojoRecementMsg {
-    @Id(autoincrement = true)
+ //@Id(autoincrement = true)
     private  Long id;
     private String myUserId;//实际上是数字userid
     private String yourUserId;
@@ -17,23 +17,23 @@ public class PojoRecementMsg {
     private String status;//发送失败
     private String contentText;//草稿内容|最近消息
     private String slient;//静默
-    @Generated(hash = 130929767)
-    public PojoRecementMsg() {
-    }
-    @Generated(hash = 2030278564)
-    public PojoRecementMsg(Long id, String myUserId, String yourUserId, String portrait, String unreadCount, String name, String time, String prompt, String status, String contentText, String slient) {
-        this.id = id;
-        this.myUserId = myUserId;
-        this.yourUserId = yourUserId;
-        this.portrait = portrait;
-        this.unreadCount = unreadCount;
-        this.name = name;
-        this.time = time;
-        this.prompt = prompt;
-        this.status = status;
-        this.contentText = contentText;
-        this.slient = slient;
-    }
+ //@Generated(hash = 130929767)
+public PojoRecementMsg() {
+}
+//@Generated(hash = 2030278564)
+public PojoRecementMsg(Long id, String myUserId, String yourUserId, String portrait, String unreadCount, String name, String time, String prompt, String status, String contentText, String slient) {
+    this.id = id;
+    this.myUserId = myUserId;
+    this.yourUserId = yourUserId;
+    this.portrait = portrait;
+    this.unreadCount = unreadCount;
+    this.name = name;
+    this.time = time;
+    this.prompt = prompt;
+    this.status = status;
+    this.contentText = contentText;
+    this.slient = slient;
+}
     public Long getId() {
         return id;
     }

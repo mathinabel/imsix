@@ -68,12 +68,12 @@ public class AddFriendSearchUserInfoAc extends AppCompatActivity {
         initDataFromNet();
     }
 
-    private void initListener(User user) {
+    private void initListener(User user, String name) {
         btnAddFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //将自身信息打包发送
-                PojoPullUnReadAddFriendMsgFromNet pojoPullUnReadAddFriendMsgFromNet = new PojoPullUnReadAddFriendMsgFromNet(null, name, null, sex, userid, user.getId(), "", "", "", por, Constant.addfriend_send_but_wait_to_answer, "");
+                PojoPullUnReadAddFriendMsgFromNet pojoPullUnReadAddFriendMsgFromNet = new PojoPullUnReadAddFriendMsgFromNet(null, AddFriendSearchUserInfoAc.this.name,name , sex, userid, user.getId(), "", "", "", por, Constant.addfriend_send_but_wait_to_answer, "");
                 Gson gson = new Gson();
                 NettyLongChannel.sendMsg(ProtoConstant.ADD_FRIEND, gson.toJson(pojoPullUnReadAddFriendMsgFromNet));
 
@@ -134,7 +134,7 @@ public class AddFriendSearchUserInfoAc extends AppCompatActivity {
                             tvAccount5.setText(user.getId());
                             tvName.setText(user.getName());
                             ivHeader.setImageURI(Uri.parse(user.getPortrait()));
-                            initListener(user);
+                            initListener(user,user.getName());
                         }
 
 

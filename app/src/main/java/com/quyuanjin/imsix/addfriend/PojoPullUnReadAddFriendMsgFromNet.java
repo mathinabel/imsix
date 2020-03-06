@@ -4,9 +4,9 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 
-@Entity
+//@Entity
 public class PojoPullUnReadAddFriendMsgFromNet {
-    @Id(autoincrement = true)
+//@Id(autoincrement = true)
     private Long id;
     private String nameTextView;//用户昵称
     private String contentTextView;//个性签名
@@ -20,11 +20,11 @@ public class PojoPullUnReadAddFriendMsgFromNet {
     private String sendSucceedType;
     private String readType;
 
-    @Generated(hash = 925435744)
+// @Generated(hash = 925435744)
     public PojoPullUnReadAddFriendMsgFromNet() {
     }
 
-    @Generated(hash = 14026413)
+//@Generated(hash = 14026413)
     public PojoPullUnReadAddFriendMsgFromNet(Long id, String nameTextView, String contentTextView, String sex, String userid, String receiverId, String msg, String createTime, String portraitImageViewlocalPath, String portraitImageViewnetPath, String sendSucceedType, String readType) {
         this.id = id;
         this.nameTextView = nameTextView;

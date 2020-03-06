@@ -1,6 +1,8 @@
 package netty;
 
 
+import com.quyuanjin.imsix.Constant;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -40,7 +42,7 @@ public class NettyLongChannel {
                         }
                     });
             //120.79.178.226  192.168.43.75
-            ChannelFuture future = bootstrap.connect("120.79.178.226", 8089).sync();
+            ChannelFuture future = bootstrap.connect(Constant.HOST, 8089).sync();
             channel = future.channel();
 
             return true;

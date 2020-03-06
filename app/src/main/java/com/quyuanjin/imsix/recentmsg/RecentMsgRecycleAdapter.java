@@ -57,14 +57,23 @@ public class RecentMsgRecycleAdapter extends RecyclerView.Adapter<RecentMsgRecyc
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         if (entityList.size() != 0) {
             PojoRecementMsg pojoRecementMsg = entityList.get(position);
-            holder.unreadCountTextView.setText(pojoRecementMsg.getUnreadCount());
-            holder.nameTextView.setText(pojoRecementMsg.getName());
-            holder.promptTextView.setText(pojoRecementMsg.getPrompt());
-            holder.timeTextView.setText(pojoRecementMsg.getTime());
-            holder.contentTextView.setText(pojoRecementMsg.getContentText());
+        //    holder.unreadCountTextView.setText(pojoRecementMsg.getUnreadCount());
+            if (!"".equals(pojoRecementMsg.getName())){
+                holder.nameTextView.setText(pojoRecementMsg.getName());
+            }
+            if (!"".equals(pojoRecementMsg.getPrompt())){
+                holder.promptTextView.setText(pojoRecementMsg.getPrompt());
+            }
+            if (!"".equals(pojoRecementMsg.getTime())){
+                holder.timeTextView.setText(pojoRecementMsg.getTime());
+            }
+            if (!"".equals(pojoRecementMsg.getContentText())){
+                holder.contentTextView.setText(pojoRecementMsg.getContentText());
+            }
+
             if (!"".equals(pojoRecementMsg.getPortrait())){
-                Log.d("888",pojoRecementMsg.getPortrait());
-                  //  holder.portraitImageView.setImageURI(Uri.parse(pojoRecementMsg.getPortrait()));
+               // Log.d("888",pojoRecementMsg.getPortrait());
+                    holder.portraitImageView.setImageURI(Uri.parse(pojoRecementMsg.getPortrait()));
 
                // holder.portraitImageView.setImageURI(Uri.parse("http://120.79.178.226:8080/File/portrait/upload/666.png"));
             }
@@ -113,7 +122,7 @@ public class RecentMsgRecycleAdapter extends RecyclerView.Adapter<RecentMsgRecyc
 
         public ViewHolder(View itemView) {
             super(itemView);
-            portraitImageView = itemView.findViewById(R.id.portraitImageView1);
+            portraitImageView = itemView.findViewById(R.id.portraitImageView);
             unreadCountTextView = itemView.findViewById(R.id.unreadCountTextView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);

@@ -5,15 +5,15 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.IBinder;
-import android.util.DisplayMetrics;
 
 import androidx.annotation.NonNull;
 import androidx.camera.camera2.Camera2Config;
 import androidx.camera.core.CameraXConfig;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.kongzue.dialog.v2.DialogSettings;
+
 import com.quyuanjin.imsix.chatsession.DaoMaster;
 import com.quyuanjin.imsix.chatsession.DaoSession;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -24,6 +24,8 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import service.NettyService;
+
+import static com.kongzue.dialog.v2.DialogSettings.STYLE_IOS;
 
 
 public class App extends Application implements CameraXConfig.Provider{
@@ -37,10 +39,11 @@ public class App extends Application implements CameraXConfig.Provider{
     @Override
     public void onCreate() {
         super.onCreate();
-
+        DialogSettings.style = STYLE_IOS;
+        DialogSettings.use_blur = false;
         mApplication = this;
         initOkhttpHelp();
-        initGreenDao();
+       initGreenDao();
         initSocketService();
     }
 
@@ -67,7 +70,7 @@ public class App extends Application implements CameraXConfig.Provider{
         bindService(start, nettyService, BIND_AUTO_CREATE);
     }
 
-    private void initGreenDao() {
+   private void initGreenDao() {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "im.db");
         SQLiteDatabase db = helper.getWritableDatabase();
         DaoMaster daoMaster = new DaoMaster(db);

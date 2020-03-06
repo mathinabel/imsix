@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.kongzue.dialog.v2.Notification;
 import com.quyuanjin.imsix.Constant;
 import com.quyuanjin.imsix.MainActivity;
 import com.quyuanjin.imsix.app.App;
@@ -50,6 +51,8 @@ import eventbus.ClienthandlerBus.TellReceMent;
 import eventbus.ClienthandlerBus.TellRecementAddFirendMsgBack;
 import json.User;
 import okhttp3.Call;
+
+import static com.kongzue.dialog.v2.Notification.SHOW_TIME_SHORT;
 
 public class RecementFragment extends Fragment {
 
@@ -341,6 +344,13 @@ public class RecementFragment extends Fragment {
         initDataFromNet();
        //ToastUtils.show( getContext(),"收到一条来自"+mainac.getMsg().getSendID()+"的消息，消息为："+mainac.getMsg().getMsg());
      //   ToastUtils.show( getContext(),"收到一条新消息");
-
+        Notification.show(getContext(), 2, R.drawable.adj, getString(R.string.app_name), "这是一条消息", Notification.SHOW_TIME_LONG,R.color.app_color_f6)
+                .setOnNotificationClickListener(new Notification.OnNotificationClickListener() {
+                    @Override
+                    public void OnClick(int id) {
+                        Toast.makeText(getContext(),"点击了通知",Toast.LENGTH_SHORT).show();
+                    }
+                })
+        ;
     }
 }

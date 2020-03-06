@@ -120,9 +120,10 @@
             />
 
         <com.lqr.optionitemview.OptionItemView
+            android:id="@+id/change_password"
             style="@style/OptionItem"
             android:background="@drawable/selector_option_item"
-            app:left_text="@string/my_location"
+            app:left_text="更改/填写密码"
             app:left_text_color="@color/black0"
             app:left_text_margin_left="30px"
             app:left_text_size="16sp"/>

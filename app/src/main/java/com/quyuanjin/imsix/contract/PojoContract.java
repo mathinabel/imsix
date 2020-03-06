@@ -1,15 +1,13 @@
 package com.quyuanjin.imsix.contract;
 
-import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
-@Entity
+//@Entity
 public class PojoContract {
-    @Id(autoincrement = true)
+// @Id(autoincrement = true)
     private  Long id;
     private   String portraitImageView;//头像
     private   String nameTextView;//用户昵称（自己设定的优先）
@@ -22,22 +20,22 @@ public class PojoContract {
     private String contractUserId;
 
 
-    @Generated(hash = 1539707127)
-    public PojoContract(Long id, String portraitImageView, String nameTextView, String contentTextView, String sex, String userid, String tag, String pinyin, String myUserId, String contractUserId) {
-        this.id = id;
-        this.portraitImageView = portraitImageView;
-        this.nameTextView = nameTextView;
-        this.contentTextView = contentTextView;
-        this.sex = sex;
-        this.userid = userid;
-        this.tag = tag;
-        this.pinyin = pinyin;
-        this.myUserId = myUserId;
-        this.contractUserId = contractUserId;
-    }
-    @Generated(hash = 493916022)
-    public PojoContract() {
-    }
+//@Generated(hash = 1539707127)
+public PojoContract(Long id, String portraitImageView, String nameTextView, String contentTextView, String sex, String userid, String tag, String pinyin, String myUserId, String contractUserId) {
+    this.id = id;
+    this.portraitImageView = portraitImageView;
+    this.nameTextView = nameTextView;
+    this.contentTextView = contentTextView;
+    this.sex = sex;
+    this.userid = userid;
+    this.tag = tag;
+    this.pinyin = pinyin;
+    this.myUserId = myUserId;
+    this.contractUserId = contractUserId;
+}
+//@Generated(hash = 493916022)
+public PojoContract() {
+}
     public String getMyUserId() {
         return myUserId;
     }

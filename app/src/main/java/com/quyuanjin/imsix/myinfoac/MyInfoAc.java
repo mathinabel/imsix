@@ -1,10 +1,12 @@
 package com.quyuanjin.imsix.myinfoac;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,6 +17,12 @@ import androidx.core.content.ContextCompat;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.kongzue.dialog.listener.InputDialogOkButtonClickListener;
+import com.kongzue.dialog.util.InputInfo;
+import com.kongzue.dialog.v2.InputDialog;
+import com.kongzue.dialog.v2.Notification;
+import com.kongzue.dialog.v2.TipDialog;
+import com.kongzue.dialog.v2.WaitDialog;
 import com.lqr.optionitemview.OptionItemView;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -26,6 +34,10 @@ import com.quyuanjin.imsix.Constant;
 import com.quyuanjin.imsix.R;
 import com.quyuanjin.imsix.contract.EventBusContract;
 import com.quyuanjin.imsix.contract.PojoContract;
+import com.quyuanjin.imsix.dialog.MyDialog;
+import com.quyuanjin.imsix.login.LoginAndRegisterAc;
+import com.quyuanjin.imsix.login.User;
+import com.quyuanjin.imsix.utils.SDialog;
 import com.quyuanjin.imsix.utils.SharedPreferencesUtils;
 import com.quyuanjin.imsix.utils.ToastUtils;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
@@ -42,6 +54,7 @@ import java.util.List;
 import java.util.UUID;
 
 import okhttp3.Call;
+import okhttp3.Request;
 
 
 public class MyInfoAc extends AppCompatActivity {
@@ -49,7 +62,10 @@ public class MyInfoAc extends AppCompatActivity {
     private SimpleDraweeView portraitImageView;
     private OptionItemView oivName;
     private OptionItemView oivAccount;
+    private OptionItemView oivQRCodeCard;
+    private OptionItemView changePassword;
     String userid;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +76,9 @@ public class MyInfoAc extends AppCompatActivity {
         initListener();
         initBackListener();
     }
+
     private void initBackListener() {
-        CommonTitleBar commonTitleBar=findViewById(R.id.titlebar9);
+        CommonTitleBar commonTitleBar = findViewById(R.id.titlebar9);
         commonTitleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
             @Override
             public void onClicked(View v, int action, String extra) {
@@ -71,6 +88,7 @@ public class MyInfoAc extends AppCompatActivity {
             }
         });
     }
+
     private void initListener() {
         llHeader.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +146,127 @@ public class MyInfoAc extends AppCompatActivity {
         portraitImageView = findViewById(R.id.portraitImageView2);
         oivAccount = findViewById(R.id.oivAccount);
         oivName = findViewById(R.id.oivName);
+        oivName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputDialog.show(MyInfoAc.this, "设置昵称", "设置一个好听的名字吧", new InputDialogOkButtonClickListener() {
+                    @Override
+                    public void onClick(Dialog dialog, String inputText) {
+                        OkHttpUtils.post()
+                                .url(Constant.URL + "setName")
+                                .addParams("name", inputText)
+                                .addParams("userid", userid)
+                                .build().execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                TipDialog.show(MyInfoAc.this, "设置失败", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_FINISH);
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                TipDialog.show(MyInfoAc.this, "设置成功", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_FINISH);
+                                dialog.dismiss();
+                                SharedPreferencesUtils.setParam(getApplicationContext(), "name", inputText);
+
+                            }
+
+                            @Override
+                            public void onBefore(Request request, int id) {
+                                super.onBefore(request, id);
+                                WaitDialog.show(MyInfoAc.this, "等待中...");
+
+                            }
+
+                            @Override
+                            public void onAfter(int id) {
+                                super.onAfter(id);
+                                WaitDialog.dismiss();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        oivQRCodeCard = findViewById(R.id.oivQRCodeCard);
+        oivQRCodeCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialogOrDis();
+            }
+        });
+        changePassword = findViewById(R.id.change_password);
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputDialog.show(MyInfoAc.this, "设置", "请设置密码：", new InputDialogOkButtonClickListener() {
+                    @Override
+                    public void onClick(Dialog dialog, String inputText) {
+                        // if (!inputText.equals("kongzue")) {
+                        //     TipDialog.show(MyInfoAc.this, "错误的用户名", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_ERROR);
+                        //     Notification.show(MyInfoAc.this, 0, "小提示：用户名是：kongzue");
+                        //   } else {
+
+
+                        OkHttpUtils.post()
+                                .url(Constant.URL + "setPwd")
+                                .addParams("pwd", inputText)
+                                .addParams("userid", userid)
+                                .build().execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                TipDialog.show(MyInfoAc.this, "设置失败", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_FINISH);
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                Gson gson = new Gson();
+                                User user = gson.fromJson(response, User.class);
+                                if (!"".equals(user.getId())) {
+
+                                    TipDialog.show(MyInfoAc.this, "设置成功", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_FINISH);
+                                    dialog.dismiss();
+                                    SharedPreferencesUtils.setParam(getApplicationContext(), "name", user.getName());
+
+                                    oivName.setRightText(user.getName());
+
+                                }else {
+                                    TipDialog.show(MyInfoAc.this, "设置失败", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_FINISH);
+                                    dialog.dismiss();
+                                }
+
+
+                            }
+
+                            @Override
+                            public void onBefore(Request request, int id) {
+                                super.onBefore(request, id);
+                                WaitDialog.show(MyInfoAc.this, "等待中...");
+
+                            }
+
+                            @Override
+                            public void onAfter(int id) {
+                                super.onAfter(id);
+                                WaitDialog.dismiss();
+                            }
+                        });
+
+
+                        //  }
+                    }
+                }).setInputInfo(new InputInfo()
+                        .setMAX_LENGTH(18)                                          //设置最大长度11位
+                );
+            }
+        });
+    }
+
+    private void showDialogOrDis() {
+        MyDialog myAdvertisementView = new MyDialog(this);
+        myAdvertisementView.showDialog();
     }
 
     @Override
@@ -138,13 +277,14 @@ public class MyInfoAc extends AppCompatActivity {
             portraitImageView.setImageURI(Uri.parse(s));
         }
     }
+
     private void updateImage(String cutPath) {
 
-ToastUtils.show(MyInfoAc.this,cutPath);
+        //ToastUtils.show(MyInfoAc.this,cutPath);
         OkHttpUtils.post()
                 .url(Constant.URL + "uploadPortrait")
                 .addParams("userid", userid)
-                .addFile("portrait", UUID.randomUUID() + ".jpeg", new File(cutPath))//
+                .addFile("portrait", UUID.randomUUID() + ".png", new File(cutPath))//
 
                 .build()
                 .execute(new StringCallback() {
@@ -156,16 +296,16 @@ ToastUtils.show(MyInfoAc.this,cutPath);
                     @Override
                     public void onResponse(String response, int id) {
                         //保存返回的头像地址
-                        if (!"上传失败".equals(response)){
+                        if (!"上传失败".equals(response)) {
                             SharedPreferencesUtils.setParam(getApplicationContext(), "CutPath", response);
                             String s = (String) SharedPreferencesUtils.getParam(getApplicationContext(), "CutPath", "");
                             if (!("".equals(s))) {
                                 portraitImageView.setImageURI(Uri.parse(s));
                             }
-                            ToastUtils.show(MyInfoAc.this,"上传dao"+response);
+                            //    ToastUtils.show(MyInfoAc.this,"上传dao"+response);
 
-                        }else {
-                            ToastUtils.show(MyInfoAc.this,"上传失败");
+                        } else {
+                            ToastUtils.show(MyInfoAc.this, "上传失败");
                         }
 
                     }
